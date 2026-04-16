@@ -5,112 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>李振生 | 个人主页</title>
     <style>
+        /* 全局重置 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* 背景与主体 */
         body {
-            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-            line-height: 1.7;
-            color: #333;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+
+        /* 卡片容器 */
+        .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f8f9fa;
+            background: #16162a;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0, 200, 255, 0.1);
+            border: 1px solid #333355;
         }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+
+        /* 标题区 */
+        header {
+            border-bottom: 1px solid #444466;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
         }
+
         h1 {
-            color: #1a1a1a;
-            font-size: 2.2em;
+            font-size: 2.5em;
+            color: #ffffff;
             margin-bottom: 10px;
-            border-bottom: 3px solid #0366d6;
-            padding-bottom: 10px;
+            letter-spacing: 1px;
         }
-        .intro {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 35px;
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #8899ff;
+            font-weight: 300;
         }
+
+        /* 通用模块标题 */
         h2 {
-            color: #24292f;
-            font-size: 1.5em;
-            margin: 30px 0 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
+            color: #00ccff;
+            font-size: 1.4em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00ccff;
+            display: inline-block;
         }
-        .project {
-            background: #f6f8fa;
-            padding: 20px;
-            border-radius: 8px;
+
+        /* 项目卡片 */
+        .project-card {
+            background: #1c1c36;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #00ccff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 200, 255, 0.2);
+        }
+
+        .project-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: #b0b0b0;
             margin-bottom: 15px;
-            border-left: 4px solid #0366d6;
         }
-        .project h3 {
-            color: #0366d6;
-            margin-bottom: 8px;
-        }
+
+        /* 标签样式 */
         .tag {
             display: inline-block;
-            background: #e1ecf4;
-            color: #0366d6;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.9em;
-            margin-right: 6px;
-            margin-top: 5px;
+            background: #2a2a4a;
+            color: #00ccff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 10px;
+            margin-bottom: 5px;
         }
-        .contact {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+
+        /* 技能与联系 */
+        .info-section {
+            font-size: 1.05em;
+            margin: 15px 0;
         }
+
+        .highlight {
+            color: #00ff99;
+            font-weight: bold;
+        }
+
+        /* 链接 */
         a {
-            color: #0366d6;
+            color: #00ccff;
             text-decoration: none;
         }
-        ul {
-            padding-left: 20px;
-            margin-top: 8px;
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>李振生</h1>
-        <p class="intro">研究方向：生成式视觉恢复、AIGC、图像/视频增强、深度学习</p>
+        <header>
+            <h1>李振生</h1>
+            <p class="subtitle">深圳大学硕士研究生 | 研究方向：底层视觉、AIGC、图像/视频增强</p>
+        </header>
 
-        <h2>科研项目</h2>
+        <section>
+            <h2>核心优势</h2>
+            <div class="info-section">
+                <span class="highlight">GPA 3.61/4.0</span> | 
+                专业排名 <span class="highlight">2/102</span> | 
+                深圳大学新一代电子信息技术硕士
+            </div>
+        </section>
 
-        <div class="project">
-            <h3>基于多模态条件 Flow Matching 与 Mamba 的生成式图像恢复</h3>
-            <p>构建多模态条件生成式框架，实现高质量、高效率的图像增强与复原</p>
-            <span class="tag">Flow Matching</span>
-            <span class="tag">Mamba</span>
-            <span class="tag">多模态</span>
-            <span class="tag">生成式恢复</span>
-        </div>
+        <section>
+            <h2>科研项目</h2>
 
-        <div class="project">
-            <h3>面向视频增强与文本驱动编辑的时序一致性建模方法</h3>
-            <p>解决视频增强闪烁、跳变问题，实现稳定、高质量的视频编辑与恢复</p>
-            <span class="tag">时序一致性</span>
-            <span class="tag">CLIP</span>
-            <span class="tag">视频增强</span>
-            <span class="tag">文本驱动编辑</span>
-        </div>
+            <div class="project-card">
+                <div class="project-title">📷 基于多模态 Flow Matching 与 Mamba 的图像恢复</div>
+                <div class="project-desc">
+                    针对水下复杂环境色偏、模糊问题，构建端到端多模态条件生成式复原系统，实现真实色彩与细节还原。
+                </div>
+                <div>
+                    <span class="tag">水下图像增强</span>
+                    <span class="tag">Flow Matching</span>
+                    <span class="tag">Mamba</span>
+                    <span class="tag">多模态建模</span>
+                </div>
+            </div>
 
-        <h2>专业技能</h2>
-        <p><strong>编程：</strong> Python (PyTorch)、C、Matlab</p>
-        <p><strong>生成模型：</strong> Flow Matching、Diffusion、DiT</p>
-        <p><strong>方向：</strong> 图像/视频增强、AIGC、文本驱动编辑、底层视觉</p>
+            <div class="project-card">
+                <div class="project-title">🎥 面向视频增强的时序一致性建模</div>
+                <div class="project-desc">
+                    解决视频增强与文本驱动编辑中的闪烁、跳变问题，提升视频内容的语义感知与时序稳定性。
+                </div>
+                <div>
+                    <span class="tag">视频增强</span>
+                    <span class="tag">时序一致性</span>
+                    <span class="tag">CLIP Prompt Tuning</span>
+                    <span class="tag">文本驱动编辑</span>
+                </div>
+            </div>
+        </section>
 
-        <div class="contact">
+        <section>
+            <h2>专业技能</h2>
+            <div class="info-section">
+                <strong>核心框架：</strong>PyTorch、Flow Matching、Diffusion、DiT、Stable Diffusion<br>
+                <strong>技术栈：</strong>Python、C、Matlab、CLIP、LLaVA<br>
+                <strong>研究方向：</strong>生成式视觉恢复、AIGC、图像/视频质量增强
+            </div>
+        </section>
+
+        <section>
             <h2>联系方式</h2>
-            <p>GitHub：<a href="https://github.com/counterany">counterany</a>（代码私有，面试可授权查看）</p>
-            <p>邮箱：你的邮箱</p>
-        </div>
+            <div class="info-section">
+                📞 GitHub: <a href="https://github.com/counterany" target="_blank">counterany</a> (私有仓库，面试可授权)<br>
+                📧 邮箱: lizhensheng@email.com <i>(请替换成你的邮箱)</i>
+            </div>
+        </section>
     </div>
 </body>
 </html>
