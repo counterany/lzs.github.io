@@ -36,16 +36,41 @@ a{color:#38bdf8}
 
 <!-- ================== 项目1 ================== -->
 <div class="card">
-<h3>多模态 Flow Matching + Mamba 图像恢复</h3>
-<p>面向水下/低光/模糊场景，实现高效生成式增强</p>
+<h3>生成式图像恢复：基于多模态Flow Matching和Mamba</h3>
+<p>
+    面向水下图像增强任务，将图像恢复建模为<strong>多模态条件生成问题</strong>，
+    基于 Flow Matching 学习从退化分布到高质量分布的连续生成过程，
+    并结合文本语义条件与 Mamba 高效建模，在轻量化设置下实现高质量恢复。
+  </p>
 <div>
-<span class="tag">文本引导图像增强</span>
+<span class="tag">多模态条件生成式恢复</span>
 <span class="tag">Flow Matching</span>
 <span class="tag">Mamba</span>
-<span class="tag">多模态text-image数据集</span>
-<span class="tag">图像增强</span>
+<span class="tag">多模态（text-image）</span>
+<span class="tag">文本引导增强</span>
 </div>
-
+<!-- ===== 方法 ===== -->
+<h4>项目亮点</h4>
+<ul>
+    <li>将 <strong>Flow Matching</strong> 引入图像恢复任务，建模从噪声到清晰图像的连续生成过程，提升复杂退化场景下的恢复能力</li>
+    <li>引入<strong>图像 + 文本</strong>多模态条件，通过 Cross-Attention 与 AdaLN 融合结构信息和语义信息，实现更具可控性的增强</li>
+    <li>基于 <strong>Mamba</strong> 构建高效生成主干，并设计 <strong>S2C-SS2D</strong> 模块，增强二维长程依赖建模能力，在低参数规模下保持高恢复质量</li>
+    <li>提出面向水下场景的<strong>灰度世界白平衡算法</strong>并转化为<strong>可学习的色彩校正模块</strong>，改善颜色偏移问题</li>
+</ul>
+<h4>方法概述</h4>
+<ul>
+    <li><strong>生成范式：</strong>基于 Rectified Flow / Flow Matching 建立条件生成恢复框架</li>
+    <li><strong>条件注入：</strong>退化图像通过 Cross-Attention 注入结构信息，文本通过 AdaLN 实现语义调制</li>
+    <li><strong>主干网络：</strong>采用 Mamba 状态空间模型进行高效建模，并针对二维视觉建模设计改进模块</li>
+    <li><strong>颜色校正：</strong>结合水下成像特点设计白平衡校正策略，缓解色偏与亮度失衡问题</li>
+</ul>
+<!-- ===== 结果 ===== -->
+<h4>结果</h4>
+  <ul>
+    <li>参数量 <strong>9.78M</strong>，较基线减少 <strong>62%</strong></li>
+    <li>FLOPs <strong>33.27G</strong>，较基线降低 <strong>50%</strong></li>
+    <li>在UIEB，LSUI，SeaThru多个数据集上优于基线方法，并达到 <strong>SOTA</strong> 水平</li>
+  </ul>
 <!-- 效果对比图 -->
 <div style="margin-top:16px;">
 
@@ -77,6 +102,19 @@ a{color:#38bdf8}
 <!-- 消融实验1 -->
 <div class="ablation-block">
 <div class="ablation-title">消融1：各模块对增强效果的贡献</div>
+  <div style="color:#a5b4fc; font-size:15px; margin-bottom:8px;">
+    <h3>视觉效果对比<h3>
+    左→右：输入 | Ours | W/O text | W/O Flow Matching | W/O S2C-SS2D | W/O CCB
+  </div>
+
+  <div style="display:flex; gap:10px; margin-bottom:10px;">
+    <img src="images/Raw/10.png"    style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/Ours/10.png"     style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/WF-Diff/10.png" style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/GuideHyb/10.png" style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/HFormer/10.png"       style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/FMamba/10.png"       style="width:calc(100% / 7); border-radius:6px;">
+  </div>
 <img src="ablation_modules.jpg" class="ablation-img">
 </div>
 
