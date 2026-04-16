@@ -98,22 +98,31 @@ a{color:#38bdf8}
   </div>
 
 </div>
-
+<h4>模块作用分析</h4>
+<ul>
+  <li><strong>多模态条件注入：</strong>引入文本语义后，模型对场景内容和颜色风格的恢复更稳定，增强结果更符合语义描述。</li>
+  <li><strong>长程补偿 Mamba：</strong>相比基础主干，改进模块增强了二维长程依赖建模能力，在大范围颜色偏移和低光区域恢复中表现更好。</li>
+  <li><strong>灰度世界白平衡：</strong>有效缓解水下场景中的颜色偏移问题，为后续生成恢复提供更稳定的输入分布。</li>
+</ul>
 <!-- 消融实验1 -->
 <div class="ablation-block">
-<div class="ablation-title">消融1：各模块对增强效果的贡献</div>
-  <div style="color:#a5b4fc; font-size:15px; margin-bottom:8px;">
-    <h3>视觉效果对比<h3>
-    左→右：输入 | Ours | W/O text | W/O Flow Matching | W/O S2C-SS2D | W/O CCB
-  </div>
+<div class="ablation-title">消融1：Flow Matching 与文本条件注入</div>
+
+<div style="color:#a5b4fc; font-size:15px; margin-bottom:8px;">
+  <strong>可视化对比：</strong><br>
+  第一组：输入 | 无 Flow Matching | 使用 Flow Matching<br>
+  第二组：输入 | 无文本条件 | 使用文本条件
+</div>
 
   <div style="display:flex; gap:10px; margin-bottom:10px;">
-    <img src="images/Raw/10.png"    style="width:calc(100% / 7); border-radius:6px;">
-    <img src="images/Ours/10.png"     style="width:calc(100% / 7); border-radius:6px;">
+    <img src="images/Raw/10.png"    style="width:calc(100% / 3); border-radius:6px;">
+    <img src="images/Ours/10.png"     style="width:calc(100% / 3); border-radius:6px;">
     <img src="images/WF-Diff/10.png" style="width:calc(100% / 7); border-radius:6px;">
-    <img src="images/GuideHyb/10.png" style="width:calc(100% / 7); border-radius:6px;">
-    <img src="images/HFormer/10.png"       style="width:calc(100% / 7); border-radius:6px;">
-    <img src="images/FMamba/10.png"       style="width:calc(100% / 7); border-radius:6px;">
+  </div>
+  <div style="display:flex; gap:10px; margin-bottom:10px;">
+    <img src="images/Raw/10.png"    style="width:calc(100% / 3); border-radius:6px;">
+    <img src="images/Ours/10.png"     style="width:calc(100% / 3); border-radius:6px;">
+    <img src="images/WF-Diff/10.png" style="width:calc(100% / 3); border-radius:6px;">
   </div>
 <img src="ablation_modules.jpg" class="ablation-img">
 </div>
