@@ -1,186 +1,113 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>李振生 | 个人主页</title>
-    <style>
-        /* 全局重置 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* 背景与主体 */
-        body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-            color: #e0e0e0;
-            line-height: 1.8;
-            padding: 40px 20px;
-        }
-
-        /* 卡片容器 */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #16162a;
-            padding: 50px;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(0, 200, 255, 0.1);
-            border: 1px solid #333355;
-        }
-
-        /* 标题区 */
-        header {
-            border-bottom: 1px solid #444466;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            color: #8899ff;
-            font-weight: 300;
-        }
-
-        /* 通用模块标题 */
-        h2 {
-            color: #00ccff;
-            font-size: 1.4em;
-            margin: 40px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #00ccff;
-            display: inline-block;
-        }
-
-        /* 项目卡片 */
-        .project-card {
-            background: #1c1c36;
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #00ccff;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 200, 255, 0.2);
-        }
-
-        .project-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .project-desc {
-            color: #b0b0b0;
-            margin-bottom: 15px;
-        }
-
-        /* 标签样式 */
-        .tag {
-            display: inline-block;
-            background: #2a2a4a;
-            color: #00ccff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin-right: 10px;
-            margin-bottom: 5px;
-        }
-
-        /* 技能与联系 */
-        .info-section {
-            font-size: 1.05em;
-            margin: 15px 0;
-        }
-
-        .highlight {
-            color: #00ff99;
-            font-weight: bold;
-        }
-
-        /* 链接 */
-        a {
-            color: #00ccff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李振生 | 科研主页</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Microsoft YaHei",sans-serif;background:#111827;color:#e5e7eb;padding:40px 20px}
+.container{max-width:1000px;margin:0 auto}
+h1{font-size:30px;color:#fff;margin-bottom:8px}
+.subtitle{color:#9ca3af;margin-bottom:40px}
+.section{margin-bottom:50px}
+h2{font-size:20px;color:#38bdf8;margin-bottom:20px;border-left:4px solid #38bdf8;padding-left:12px}
+.card{background:#1f2937;border-radius:12px;padding:24px;margin-bottom:24px}
+.card h3{color:#fff;font-size:18px;margin-bottom:10px}
+.card p{color:#d1d5db;margin-bottom:12px;line-height:1.6}
+.tag{display:inline-block;background:#374151;color:#93c5fd;padding:4px 10px;border-radius:6px;font-size:12px;margin-right:6px}
+.imgs-row{display:flex;gap:10px;margin-top:16px;overflow-x:auto;padding-bottom:6px}
+.imgs-row img{height:170px;border-radius:6px}
+.ablation-block{margin-top:20px}
+.ablation-title{color:#a5b4fc;font-size:15px;margin-bottom:8px}
+.ablation-img{width:100%;border-radius:6px}
+a{color:#38bdf8}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>李振生</h1>
-            <p class="subtitle">深圳大学硕士研究生 | 研究方向：底层视觉、AIGC、图像/视频增强</p>
-        </header>
+<div class="container">
 
-        <section>
-            <h2>核心优势</h2>
-            <div class="info-section">
-                <span class="highlight">GPA 3.61/4.0</span> | 
-                专业排名 <span class="highlight">2/102</span> | 
-                深圳大学新一代电子信息技术硕士
-            </div>
-        </section>
+<h1>李振生</h1>
+<p class="subtitle">生成式视觉恢复｜底层视觉｜AIGC｜图像/视频增强</p>
 
-        <section>
-            <h2>科研项目</h2>
+<div class="section">
+<h2>科研项目</h2>
 
-            <div class="project-card">
-                <div class="project-title">📷 基于多模态 Flow Matching 与 Mamba 的图像恢复</div>
-                <div class="project-desc">
-                    针对水下复杂环境色偏、模糊问题，构建端到端多模态条件生成式复原系统，实现真实色彩与细节还原。
-                </div>
-                <div>
-                    <span class="tag">水下图像增强</span>
-                    <span class="tag">Flow Matching</span>
-                    <span class="tag">Mamba</span>
-                    <span class="tag">多模态建模</span>
-                </div>
-            </div>
-            <img src="你的图片文件名.png" alt="项目对比图" style="width:100%; margin-top:15px; border-radius:8px;">
-            <div class="project-card">
-                <div class="project-title">🎥 面向视频增强的时序一致性建模</div>
-                <div class="project-desc">
-                    解决视频增强与文本驱动编辑中的闪烁、跳变问题，提升视频内容的语义感知与时序稳定性。
-                </div>
-                <div>
-                    <span class="tag">视频增强</span>
-                    <span class="tag">时序一致性</span>
-                    <span class="tag">CLIP Prompt Tuning</span>
-                    <span class="tag">文本驱动编辑</span>
-                </div>
-            </div>
-        </section>
+<!-- ================== 项目1 ================== -->
+<div class="card">
+<h3>多模态 Flow Matching + Mamba 图像恢复</h3>
+<p>面向水下/低光/模糊场景，实现高效生成式增强</p>
+<div>
+<span class="tag">Flow Matching</span>
+<span class="tag">Mamba</span>
+<span class="tag">多模态</span>
+<span class="tag">图像增强</span>
+</div>
 
-        <section>
-            <h2>专业技能</h2>
-            <div class="info-section">
-                <strong>核心框架：</strong>PyTorch、Flow Matching、Diffusion、DiT、Stable Diffusion<br>
-                <strong>技术栈：</strong>Python、C、Matlab、CLIP、LLaVA<br>
-                <strong>研究方向：</strong>生成式视觉恢复、AIGC、图像/视频质量增强
-            </div>
-        </section>
+<!-- 效果对比图 -->
+<div class="imgs-row">
+<img src="result_1.jpg">
+<img src="result_2.jpg">
+<img src="result_3.jpg">
+<img src="result_4.jpg">
+</div>
 
-        <section>
-            <h2>联系方式</h2>
-            <div class="info-section">
-                📞 GitHub: <a href="https://github.com/counterany" target="_blank">counterany</a> (私有仓库，面试可授权)<br>
-                📧 邮箱: lizhensheng@email.com <i>(请替换成你的邮箱)</i>
-            </div>
-        </section>
-    </div>
+<!-- 消融实验1 -->
+<div class="ablation-block">
+<div class="ablation-title">消融1：各模块对增强效果的贡献</div>
+<img src="ablation_modules.jpg" class="ablation-img">
+</div>
+
+<!-- 消融实验2 -->
+<div class="ablation-block">
+<div class="ablation-title">消融2：不同条件引导对色彩还原的影响</div>
+<img src="ablation_condition.jpg" class="ablation-img">
+</div>
+</div>
+
+<!-- ================== 项目2 ================== -->
+<div class="card">
+<h3>视频增强与时序一致性建模</h3>
+<p>解决视频闪烁、跳变，实现稳定文本驱动编辑</p>
+<div>
+<span class="tag">视频增强</span>
+<span class="tag">时序一致性</span>
+<span class="tag">CLIP</span>
+<span class="tag">文本编辑</span>
+</div>
+
+<div class="imgs-row">
+<img src="video_1.jpg">
+<img src="video_2.jpg">
+<img src="video_3.jpg">
+</div>
+
+<div class="ablation-block">
+<div class="ablation-title">消融：时序建模模块对闪烁抑制的效果</div>
+<img src="ablation_temporal.jpg" class="ablation-img">
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2>专业技能</h2>
+<div class="card">
+<p>PyTorch｜Python｜C｜Matlab</p>
+<p>Flow Matching｜Diffusion｜DiT｜Stable Diffusion</p>
+<p>底层视觉｜图像/视频增强｜多模态｜AIGC</p>
+</div>
+</div>
+
+<div class="section">
+<h2>联系方式</h2>
+<div class="card">
+<p>GitHub: <a href="https://github.com/counterany">counterany</a></p>
+<p>邮箱: 你的邮箱</p>
+</div>
+</div>
+
+</div>
 </body>
 </html>
