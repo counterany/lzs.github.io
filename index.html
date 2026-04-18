@@ -48,31 +48,84 @@ a{color:#38bdf8}
 <span class="tag">Mamba</span>
 <span class="tag">多模态（text-image）</span>
 <span class="tag">文本引导增强</span>
-</div>
-    <div style="background: #0f172a; border-radius: 12px; padding: 16px; margin: 16px 0; text-align: center;">
-    <div style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 12px;">📐 项目整体框架</div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 0.7rem;">
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px;">退化图像</div>
-        <span style="color:#38bdf8;">→</span>
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px; border-left: 3px solid #10b981;">
-            CLIP LoRA<br><span style="font-size:0.6rem;">(论文二)</span>
+<!-- 整体框架图（详细版） -->
+<div style="background: #0f172a; border-radius: 16px; padding: 20px; margin: 16px 0; text-align: center;">
+    <div style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 16px;">📐 AUIE 项目整体框架</div>
+    
+    <!-- 数据流 -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- 数据集构建行 -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
+                🏞️ 水下图像<br>(退化+参考)
+            </div>
+            <span style="color:#38bdf8;">→</span>
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
+                🤖 LLaVA 生成<br>原始描述
+            </div>
+            <span style="color:#38bdf8;">→</span>
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
+                ✂️ 主动学习筛选<br>去偏见+环境细化
+            </div>
+            <span style="color:#38bdf8;">→</span>
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border: 2px solid #10b981;">
+                📝 高质量图文数据集<br><span style="font-size:0.7rem;">(I<sub>deg</sub>, I<sub>ref</sub>, T)</span>
+            </div>
         </div>
-        <span style="color:#38bdf8;">→</span>
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px;">文本特征</div>
-        <span style="color:#38bdf8;">→</span>
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px; border-left: 3px solid #38bdf8;">
-            Self-Attention<br><span style="font-size:0.6rem;">语义注入</span>
+        
+        <!-- 双路分支 -->
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 8px;">
+            <!-- 左路：语义模块（论文二） -->
+            <div style="flex: 1; min-width: 200px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #10b981;">
+                <div style="color: #10b981; font-weight: bold;">🟢 语义模块 (论文二)</div>
+                <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">CLIP (冻结)</div>
+                    <span style="color:#38bdf8;">↓</span>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">LoRA 微调<br><span style="font-size:0.65rem;">(0.65% 参数)</span></div>
+                    <span style="color:#38bdf8;">↓</span>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本特征提取<br><span style="font-size:0.65rem;">(高区分度)</span></div>
+                </div>
+            </div>
+            
+            <div style="color:#38bdf8; align-self: center;">+</div>
+            
+            <!-- 右路：生成主干（论文一） -->
+            <div style="flex: 2; min-width: 260px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #38bdf8;">
+                <div style="color: #38bdf8; font-weight: bold;">🔵 生成主干 (论文一)</div>
+                <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">退化图像 + 噪声</div>
+                    <span style="color:#38bdf8;">↓</span>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">Mamba 主干 + S2C-SS2D</div>
+                    <span style="color:#38bdf8;">↓</span>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">Flow Matching 生成</div>
+                </div>
+            </div>
         </div>
-        <span style="color:#38bdf8;">→</span>
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px; border-left: 3px solid #38bdf8;">
-            Flow Matching + Mamba<br><span style="font-size:0.6rem;">(论文一)</span>
+        
+        <!-- 注入细节 -->
+        <div style="background: #111827; border-radius: 12px; padding: 12px; margin-top: 8px;">
+            <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 8px;">✨ 文本语义注入（论文二 → 论文一）</div>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px;">文本特征</div>
+                <span style="color:#38bdf8;">→</span>
+                <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px; border-bottom: 2px solid #fbbf24;">Self-Attention 注入</div>
+                <span style="color:#38bdf8;">→</span>
+                <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px;">生成主干的每一层</div>
+            </div>
+            <div style="color:#9ca3af; font-size: 0.7rem; margin-top: 8px;">通过 Self-Attention 机制，将文本特征与图像特征在每一层融合，实现精细语义引导</div>
         </div>
-        <span style="color:#38bdf8;">→</span>
-        <div style="background: #1e293b; padding: 6px 10px; border-radius: 8px;">增强图像</div>
+        
+        <!-- 输出 -->
+        <div style="display: flex; justify-content: center; margin-top: 8px;">
+            <div style="background: #1e293b; padding: 8px 16px; border-radius: 20px; border: 2px solid #38bdf8;">
+                🖼️ 增强图像 (高质量恢复)
+            </div>
+        </div>
     </div>
-    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 12px;">
-        <span style="font-size:0.65rem; background:#0f172a; padding:2px 8px; border-radius:12px;">🔵 论文一：生成主干</span>
-        <span style="font-size:0.65rem; background:#0f172a; padding:2px 8px; border-radius:12px;">🟢 论文二：语义模块</span>
+    
+    <div style="display: flex; justify-content: center; gap: 24px; margin-top: 20px;">
+        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🔵 论文一：生成主干 (TCSVT在审)</span>
+        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🟢 论文二：语义模块 (进行中)</span>
     </div>
 </div>
 <!-- ===== 方法 ===== -->
