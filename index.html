@@ -173,13 +173,41 @@ a{color:#38bdf8}
     </div>
     <div style="background:#111827; border-left: 4px solid #10b981; padding: 16px; margin: 20px 0; border-radius: 8px;">
     <h5 style="color:#10b981; margin-bottom: 6px;">论文二（进行中）</h5>
-    <div style="font-size: 1.05rem; font-weight: 600;">文本引导的水下图像增强：基于CLIP视觉LoRA的主动学习数据集与冻结文本注入</div>
+    <div style="font-size: 1.05rem; font-weight: 600;">
+        文本引导的水下图像增强：基于CLIP视觉LoRA的主动学习数据集与冻结文本注入
+    </div>
     <div style="color:#9ca3af; font-size: 0.8rem; margin-bottom: 12px;">实验阶段</div>
+
     <ul style="margin-left: 20px; color:#d1d5db;">
-        <li><strong>子数据集训练：</strong> LLaVA 生成初始描述，利用少量人工筛选数据，LoRA 微调 CLIP <strong>视觉编码器</strong>（仅0.65%参数），相似度间隔 <strong>0.019 → 0.084</strong>，R@5 <strong>25.6% → 45.0%</strong>，验证了筛选有效性。</li>
-        <li><strong>大数据集筛选：</strong> 用CLIP-LoRA模型对大规模 LLaVA 生成数据进行相似度打分，通过主动学习筛选边界样本并人工重写，构建高质量水下图文数据集；正样本相似度峰值集中在 <strong>0.7 左右</strong>，显著优于原始生成数据。</li>
-        <li><strong>生成阶段：</strong> 使用 <strong>冻结的原始CLIP文本编码器</strong>提取文本特征，通过 Self-Attention 注入论文一的生成主干每一层。（实验阶段）</li>
+
+        <li>
+            <strong>子数据集训练：</strong>
+            基于 LLaVA 生成初始图文描述，利用少量人工筛选数据对 CLIP
+            <strong>视觉编码器进行 LoRA 微调（仅0.67%参数）</strong>，
+            在测试集上实现 R@5 <strong>41.1% → 55.6%</strong>，
+            相似度间隔 <strong>0.039 → 0.056</strong>，
+            同时在标注子集上进一步提升至 <strong>0.042 → 0.071</strong>，
+            表明模型显著增强了图文对的可分性与数据筛选能力。
+        </li>
+
+        <li>
+            <strong>大数据集筛选：</strong>
+            利用 CLIP-LoRA 模型对大规模 LLaVA 生成数据进行相似度打分，
+            结合主动学习策略筛选边界样本并进行人工重写，
+            构建高质量水下图文数据集；
+            微调后模型通过<strong>压低不匹配样本相似度并保持正样本稳定</strong>，
+            有效提升数据筛选精度。
+        </li>
+
+        <li>
+            <strong>生成阶段：</strong>
+            使用<strong>冻结的原始 CLIP 文本编码器</strong>提取文本特征，
+            通过 Self-Attention 注入至论文一的生成主干各层，
+            实现文本引导的水下图像增强。（实验阶段）
+        </li>
+
     </ul>
+</div>
         <div style="margin-top: 24px;">
     <div style="color: #a5b4fc; font-size: 15px; margin-bottom: 12px;">📸 数据集示例（Reference / Caption）</div>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
