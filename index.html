@@ -29,7 +29,7 @@ a{color:#38bdf8}
 <div class="container">
 
 <h1>李圳深</h1>
-<p class="subtitle">生成式视觉恢复｜底层视觉｜AIGC｜图像/视频增强</p>
+<p class="subtitle">多模态｜生成式视觉恢复｜底层视觉｜AIGC｜图像/视频增强</p>
 
 <div class="section">
 <h2>科研项目</h2>
@@ -51,7 +51,7 @@ a{color:#38bdf8}
 <span class="tag">多模态（text-image）</span>
 <span class="tag">CLIP-LoRA视觉微调</span>
 <span class="tag">文本引导增强</span>
-<!-- 整体框架图（修正版：区分视觉LoRA筛选与冻结文本编码器） -->
+<!-- 整体框架图 -->
 <div style="background: #0f172a; border-radius: 16px; padding: 20px; margin: 16px 0; text-align: center;">
     <div style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 16px;">📐 AUIE 项目整体框架</div>
     
@@ -86,9 +86,11 @@ a{color:#38bdf8}
             <div style="flex: 1; min-width: 200px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #10b981;">
                 <div style="color: #10b981; font-weight: bold;">🟢 冻结文本编码器 (论文二)</div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">原始CLIP文本编码器</div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本描述</div>
                     <span style="color:#38bdf8;">↓</span>
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本特征提取<br><span style="font-size:0.65rem;">(冻结，不微调)</span></div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">CLIP文本编码器(冻结，不微调)</div>
+                    <span style="color:#38bdf8;">↓</span>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本特征<br><span style="font-size:0.65rem;"></span></div>
                 </div>
             </div>
             
@@ -98,9 +100,9 @@ a{color:#38bdf8}
             <div style="flex: 2; min-width: 260px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #38bdf8;">
                 <div style="color: #38bdf8; font-weight: bold;">🔵 生成主干 (论文一)</div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">退化图像 + 噪声</div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">退化图像</div>
                     <span style="color:#38bdf8;">↓</span>
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">Mamba 主干 + S2C-SS2D</div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">Mamba 主干 + 面向二维视觉长距离建模模块 + 色彩校正模块</div>
                     <span style="color:#38bdf8;">↓</span>
                     <div style="background: #1e293b; padding: 6px; border-radius: 8px;">Flow Matching 生成</div>
                 </div>
