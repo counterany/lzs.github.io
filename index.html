@@ -257,37 +257,26 @@ a{color:#38bdf8}
     </div>
 </div>
 <div style="margin-top: 24px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch;">
         <!-- 词云图 -->
-        <div style="flex: 1; min-width: 280px; background: #111827; border-radius: 12px; padding: 12px;">
+        <div style="flex: 0.9; min-width: 260px; background: #111827; border-radius: 12px; padding: 12px;">
             <div style="color: #a5b4fc; font-size: 14px; margin-bottom: 8px;">☁️ 高质量图文数据集词云</div>
             <img src="images/datset/word_Freq.png" alt="Word Cloud" style="width: 100%; border-radius: 8px;">
             <p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">涵盖丰富的水下实体与场景。</p>
         </div>
+
         <!-- 相似度分布图 -->
-        <div style="flex: 1; min-width: 280px; background: #111827; border-radius: 12px; padding: 12px;">
+        <div style="flex: 1.4; min-width: 420px; background: #111827; border-radius: 12px; padding: 12px;">
             <div style="color: #a5b4fc; font-size: 14px; margin-bottom: 8px;">📊 相似度分布（微调前后）</div>
             <img src="images/datset/SIM.png" alt="Similarity Distribution" style="width: 100%; border-radius: 8px;">
+            <p style="font-size: 12px; color: #9ca3af; margin-top: 8px;">
+                LoRA 微调后，图文对可分性明显增强，更适合用于数据筛选。
+            </p>
         </div>
     </div>
 </div>
     </div>
 </div>
-<h4>数据集构建</h4>
-  <p>
-    基于图像增强数据构建 <strong>(I<sub>deg</sub>, I<sub>ref</sub>, T)</strong> 三元组，
-    其中 <strong>I<sub>deg</sub></strong> 为退化图像，
-    <strong>I<sub>ref</sub></strong> 为参考高质量图像，
-    <strong>T</strong> 为对应文本描述。
-  </p>
-  <p>
-    文本按照<strong>“场景语义 + 恢复目标”</strong>进行构造，既提供图像内容信息，又引入期望的恢复属性，从而为生成过程提供有效约束。
-  </p>
-
-  <h4>数据示例</h4>
-  <p><i>退化图像 / 参考图像 / 文本描述。</i></p>
-  <!-- 示例 -->
-  <!-- <img src="assets/project1_data_examples.png" width="100%" alt="项目1数据示例"> -->
 <!-- ===== 结果 ===== -->
 <h4>结果</h4>
   <ul>
