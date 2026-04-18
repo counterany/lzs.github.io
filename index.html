@@ -276,49 +276,6 @@ a{color:#38bdf8}
 </div>
     </div>
 </div>
-<!-- ===== 结果 ===== -->
-<h4>结果</h4>
-  <ul>
-    <li>参数量 <strong>9.78M</strong>，较基线减少 <strong>62%</strong></li>
-    <li>FLOPs <strong>33.27G</strong>，较基线降低 <strong>50%</strong></li>
-    <li>在UIEB，LSUI，SeaThru多个数据集上优于基线方法，并达到 <strong>SOTA</strong> 水平</li>
-  </ul>
-<h4>模块作用分析</h4>
-<ul>
-  <li><strong>多模态条件注入：</strong>引入文本语义后，模型对场景内容和颜色风格的恢复更稳定，增强结果更符合语义描述。</li>
-  <li><strong>长程补偿 Mamba：</strong>相比基础主干，改进模块增强了二维长程依赖建模能力，在大范围颜色偏移和低光区域恢复中表现更好。</li>
-  <li><strong>灰度世界白平衡：</strong>有效缓解水下场景中的颜色偏移问题，为后续生成恢复提供更稳定的输入分布。</li>
-</ul>
-<!-- 消融实验1 -->
-<div class="ablation-block">
-<div class="ablation-title">消融1：Flow Matching 与文本条件注入</div>
-
-<div style="color:#a5b4fc; font-size:15px; margin-bottom:8px;">
-  <strong>可视化对比：</strong><br>
-  第一组：输入 | 使用 Flow Matching | 无 Flow Matching<br>
-  第二组：输入 | 使用文本条件 | 无文本条件
-</div>
-
-  <div style="display:flex; gap:10px; margin-bottom:10px;">
-    <img src="images/Raw/10.png"    style="width:calc(100% / 3); border-radius:6px;">
-    <img src="images/Ours/10.png"     style="width:calc(100% / 3); border-radius:6px;">
-    <img src="images/WF-Diff/10.png" style="width:calc(100% / 3); border-radius:6px;">
-  </div>
-  <div style="display:flex; gap:10px; margin-bottom:10px;">
-    <img src="images/Ours/1014.jpg"    style="width:calc(100% / 3); border-radius:6px;">
-    <img src="images/Ours/1014.png"     style="width:calc(100% / 3); border-radius:6px;">
-    <img src="images/No_Text/1014.png" style="width:calc(100% / 3); border-radius:6px;">
-  </div>
-<img src="ablation_modules.jpg" class="ablation-img">
-</div>
-
-<!-- 消融实验2 -->
-<div class="ablation-block">
-<div class="ablation-title">消融2：不同条件引导对色彩还原的影响</div>
-<img src="ablation_condition.jpg" class="ablation-img">
-</div>
-</div>
-
 <!-- ================== 项目2 ================== -->
 <div class="card">
 <h3>视频增强与时序一致性建模</h3>
