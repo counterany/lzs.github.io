@@ -86,7 +86,7 @@ a{color:#38bdf8}
             <div style="flex: 1; min-width: 200px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #10b981;">
                 <div style="color: #10b981; font-weight: bold;">🟢 冻结文本编码器 (论文二)</div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本描述</div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">图像对应文本描述</div>
                     <span style="color:#38bdf8;">↓</span>
                     <div style="background: #1e293b; padding: 6px; border-radius: 8px;">CLIP文本编码器(冻结，不微调)</div>
                     <span style="color:#38bdf8;">↓</span>
@@ -141,7 +141,7 @@ a{color:#38bdf8}
     <div style="font-size: 1.05rem; font-weight: 600;">All-Round Underwater ImageEnhancement Based on Long-Range Compensated Mamba</div>
     <div style="color:#9ca3af; font-size: 0.8rem; margin-bottom: 12px;">IEEE TCSVT，under review</div>
      <ul style="margin-left: 20px; color:#d1d5db;">
-        <li>将 <strong>Flow Matching</strong> 引入图像恢复任务，建模从噪声到清晰图像的连续生成过程，提升复杂退化场景下的恢复能力</li>
+        <li>将 <strong>Flow Matching</strong> 引入图像恢复任务，建模从退化到清晰图像的连续生成过程，提升复杂退化场景下的恢复能力</li>
     <li>基于 <strong>Mamba</strong> 构建高效生成主干，并设计 <strong>S2C-SS2D</strong> 模块，增强二维长程依赖建模能力，在低参数规模下保持高恢复质量</li>
     <li>提出面向水下场景的<strong>灰度世界白平衡算法</strong>并转化为<strong>可学习的色彩校正模块</strong>，改善颜色偏移问题</li>
         <li>参数量 <strong>9.78M</strong> (↓62%)，FLOPs <strong>33.27G</strong> (↓50%)，在 UIEB、LSUI 上达到 SOTA</li>
@@ -173,13 +173,12 @@ a{color:#38bdf8}
     </div>
     <div style="background:#111827; border-left: 4px solid #10b981; padding: 16px; margin: 20px 0; border-radius: 8px;">
     <h5 style="color:#10b981; margin-bottom: 6px;">论文二（进行中）</h5>
-    <div style="font-size: 1.05rem; font-weight: 600;">语义引导的水下图像增强：基于 CLIP LoRA 的自适应文本注入</div>
-    <div style="color:#9ca3af; font-size: 0.8rem; margin-bottom: 12px;">准备投稿（短文）</div>
+    <div style="font-size: 1.05rem; font-weight: 600;">文本引导的水下图像增强：基于CLIP视觉LoRA的主动学习数据集与冻结文本注入</div>
+    <div style="color:#9ca3af; font-size: 0.8rem; margin-bottom: 12px;">实验阶段</div>
     <ul style="margin-left: 20px; color:#d1d5db;">
-        <li>构建高质量水下图文数据集（LLaVA 生成 + 主动学习筛选），文本描述聚焦“物体+环境”，避免颜色偏见</li>
-        <li>LoRA 微调 CLIP：仅训练 <strong>0.65%</strong> 参数（98万），相似度间隔 <strong>0.019 → 0.063 (+142%)</strong>，R@5 <strong>25.6% → 40.0%</strong></li>
-        <li>将文本特征通过 <strong>Self-Attention</strong> 注入论文一的生成主干，在极端色偏样本上 PSNR ↑1.1dB，SSIM ↑0.04</li>
-        <li>证明高质量语义描述可显著提升水下增强模型对极端场景的鲁棒性</li>
+        <li><strong>子数据集训练：</strong> LLaVA 生成初始描述，利用少量人工筛选数据，LoRA 微调 CLIP <strong>视觉编码器</strong>（仅0.65%参数），相似度间隔 <strong>0.019 → 0.084</strong>，R@5 <strong>25.6% → 45.0%</strong>，验证了筛选有效性。</li>
+        <li><strong>大数据集筛选：</strong> 用CLIP-LoRA模型对大规模 LLaVA 生成数据进行相似度打分，通过主动学习筛选边界样本并人工重写，构建高质量水下图文数据集；正样本相似度峰值集中在 <strong>0.7 左右</strong>，显著优于原始生成数据。</li>
+        <li><strong>生成阶段：</strong> 使用 <strong>冻结的原始CLIP文本编码器</strong>提取文本特征，通过 Self-Attention 注入论文一的生成主干每一层。（实验阶段）</li>
     </ul>
     <!-- 指标可视化占位符 -->
     <div style="display:flex; gap:20px; margin-top: 12px; flex-wrap:wrap;">
