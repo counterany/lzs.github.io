@@ -29,28 +29,49 @@ a{color:#38bdf8}
 <div class="container">
 
 <h1>李圳深</h1>
-<p class="subtitle">多模态｜生成式视觉恢复｜底层视觉｜AIGC｜图像/视频增强</p>
+<p class="subtitle">多模态生成模型｜AIGC视觉恢复(图像/视频增强)|Flow Matching|Mamba</p>
 
 <div class="section">
 <h2>科研项目</h2>
 
 <!-- ================== 项目1 ================== -->
 <div class="card">
-<h3>生成式图像恢复：基于多模态Flow Matching和Mamba</h3>
+<h3>多模态生成式图像恢复：基于Flow Matching和Mamba</h3>
+<div style="display: flex; justify-content: center; gap: 24px; margin-top: 20px;">
+    <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">
+        🔵 Paper1：Flow Matching + Mamba（TCSVT在审）
+    </span>
+    <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">
+        🟢 Paper2：CLIP引导 + 数据构建（进行中）
+    </span>
+</div>
+<p style="color:#e2e8f0; font-size:0.95rem; line-height:1.6;">
+<strong>任务：</strong> 多模态图像恢复（生成式建模）<br>
+<strong>方法：</strong> Flow Matching + Mamba + 色彩校正 + CLIP文本引导<br>
+<strong>结果：</strong> UIEB / LSUI SOTA，参数↓62%，FLOPs↓50%
+</p>
 <p>
-    面向水下图像增强任务，将图像恢复建模为<strong>多模态条件生成问题</strong>，
-    基于 Flow Matching 学习从退化分布到高质量分布的连续生成过程，
-    并结合文本语义条件与 Mamba 高效建模，以及色彩校正在轻量化设置下实现高质量恢复。
-    利用多模态模型LlaVA构建高质量水下图文数据集，通过LoRA微调CLIP视觉编码器辅助主动学习筛选，生成阶段使用冻结的CLIP文本编码器提取语义，以Self-Attention注入生成主干的每一层，进一步提升极端场景恢复质量。
-    项目包含两篇独立论文。
-  </p>
+将图像恢复建模为<strong>多模态条件生成问题</strong>，基于Flow Matching学习退化分布到高质量分布的连续映射过程。
+构建以Mamba为核心的生成主干，实现高效长距离建模，并设计轻量化色彩校正模块提升复杂退化场景表现。
+
+同时引入文本语义作为条件信号：利用LLaVA构建图文数据集，基于CLIP-LoRA进行相似度学习与数据筛选，
+在生成阶段使用冻结的CLIP文本编码器提取语义特征，并通过Self-Attention注入生成主干各层，实现精细引导。
+
+项目对应两篇论文：分别关注生成模型结构设计与多模态数据构建。
+</p>
+<p>
+<strong>主要贡献：</strong><br>
+- 将Flow Matching引入图像恢复任务，建模连续生成过程<br>
+- 提出基于Mamba的高效生成主干，实现长距离依赖建模<br>
+- 设计轻量化可学习色彩校正模块，提升复杂退化场景表现<br>
+- 构建CLIP驱动的数据筛选与文本引导增强pipeline
+</p>
 <div>
-<span class="tag">多模态条件生成式恢复</span>
-<span class="tag">Flow Matching</span>
-<span class="tag">Mamba</span>
-<span class="tag">多模态（text-image）</span>
-<span class="tag">CLIP-LoRA视觉微调</span>
-<span class="tag">文本引导增强</span>
+<span class="tag">生成模型（Flow Matching）</span>
+<span class="tag">Mamba（SSM）</span>
+<span class="tag">多模态（CLIP / LLaVA）</span>
+<span class="tag">LoRA微调</span>
+<span class="tag">文本引导生成</span>
 <!-- 整体框架图 -->
 <div style="background: #0f172a; border-radius: 16px; padding: 20px; margin: 16px 0; text-align: center;">
     <div style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 16px;">📐 AUIE 项目整体框架</div>
@@ -128,10 +149,6 @@ a{color:#38bdf8}
                 🖼️ 增强图像 (高质量恢复)
             </div>
         </div>
-    </div>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-top: 20px;">
-        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🔵 论文一：生成主干 (TCSVT在审)</span>
-        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🟢 论文二：数据集构建 & 冻结文本编码器 (进行中)</span>
     </div>
 </div>
 <!-- ===== 方法 ===== -->
