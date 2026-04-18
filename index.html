@@ -40,21 +40,24 @@ a{color:#38bdf8}
 <p>
     面向水下图像增强任务，将图像恢复建模为<strong>多模态条件生成问题</strong>，
     基于 Flow Matching 学习从退化分布到高质量分布的连续生成过程，
-    并结合文本语义条件与 Mamba 高效建模，在轻量化设置下实现高质量恢复。项目包含两篇独立论文。
+    并结合文本语义条件与 Mamba 高效建模，以及色彩校正在轻量化设置下实现高质量恢复。
+    利用多模态模型LlaVA构建高质量水下图文数据集，通过LoRA微调CLIP视觉编码器辅助主动学习筛选，生成阶段使用冻结的CLIP文本编码器提取语义，以Self-Attention注入生成主干的每一层，进一步提升极端场景恢复质量。
+    项目包含两篇独立论文。
   </p>
 <div>
 <span class="tag">多模态条件生成式恢复</span>
 <span class="tag">Flow Matching</span>
 <span class="tag">Mamba</span>
 <span class="tag">多模态（text-image）</span>
+<span class="tag">CLIP-LoRA视觉微调</span>
 <span class="tag">文本引导增强</span>
-<!-- 整体框架图（详细版） -->
+<!-- 整体框架图（修正版：区分视觉LoRA筛选与冻结文本编码器） -->
 <div style="background: #0f172a; border-radius: 16px; padding: 20px; margin: 16px 0; text-align: center;">
     <div style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 16px;">📐 AUIE 项目整体框架</div>
     
     <!-- 数据流 -->
     <div style="display: flex; flex-direction: column; gap: 20px;">
-        <!-- 数据集构建行 -->
+        <!-- 数据集构建行（视觉LoRA用于筛选） -->
         <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
             <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
                 🏞️ 水下图像<br>(退化+参考)
@@ -65,7 +68,11 @@ a{color:#38bdf8}
             </div>
             <span style="color:#38bdf8;">→</span>
             <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
-                ✂️ 主动学习筛选<br>去偏见+环境细化
+                🔧 CLIP视觉LoRA<br>(相似度打分)
+            </div>
+            <span style="color:#38bdf8;">→</span>
+            <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border-left: 4px solid #10b981;">
+                ✂️ 主动学习筛选<br>低分样本人工重写
             </div>
             <span style="color:#38bdf8;">→</span>
             <div style="background: #1e293b; padding: 8px 12px; border-radius: 12px; border: 2px solid #10b981;">
@@ -73,17 +80,15 @@ a{color:#38bdf8}
             </div>
         </div>
         
-        <!-- 双路分支 -->
+        <!-- 双路分支：左路为冻结文本编码器（不微调），右路为生成主干 -->
         <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 8px;">
-            <!-- 左路：语义模块（论文二） -->
+            <!-- 左路：冻结文本编码器（论文二提供） -->
             <div style="flex: 1; min-width: 200px; background: #0f172a; border-radius: 12px; padding: 12px; border: 1px solid #10b981;">
-                <div style="color: #10b981; font-weight: bold;">🟢 语义模块 (论文二)</div>
+                <div style="color: #10b981; font-weight: bold;">🟢 冻结文本编码器 (论文二)</div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">CLIP (冻结)</div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">原始CLIP文本编码器</div>
                     <span style="color:#38bdf8;">↓</span>
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">LoRA 微调<br><span style="font-size:0.65rem;">(0.65% 参数)</span></div>
-                    <span style="color:#38bdf8;">↓</span>
-                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本特征提取<br><span style="font-size:0.65rem;">(高区分度)</span></div>
+                    <div style="background: #1e293b; padding: 6px; border-radius: 8px;">文本特征提取<br><span style="font-size:0.65rem;">(冻结，不微调)</span></div>
                 </div>
             </div>
             
@@ -102,17 +107,17 @@ a{color:#38bdf8}
             </div>
         </div>
         
-        <!-- 注入细节 -->
+        <!-- 注入细节：冻结文本编码器提取的特征注入生成主干每一层 -->
         <div style="background: #111827; border-radius: 12px; padding: 12px; margin-top: 8px;">
-            <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 8px;">✨ 文本语义注入（论文二 → 论文一）</div>
+            <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 8px;">✨ 文本语义注入（冻结文本编码器 → 生成主干）</div>
             <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px;">文本特征</div>
+                <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px;">冻结CLIP文本特征</div>
                 <span style="color:#38bdf8;">→</span>
                 <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px; border-bottom: 2px solid #fbbf24;">Self-Attention 注入</div>
                 <span style="color:#38bdf8;">→</span>
                 <div style="background: #1e293b; padding: 4px 8px; border-radius: 8px;">生成主干的每一层</div>
             </div>
-            <div style="color:#9ca3af; font-size: 0.7rem; margin-top: 8px;">通过 Self-Attention 机制，将文本特征与图像特征在每一层融合，实现精细语义引导</div>
+            <div style="color:#9ca3af; font-size: 0.7rem; margin-top: 8px;">通过 Self-Attention 将冻结文本编码器提取的语义与图像特征在每一层融合，实现精细引导</div>
         </div>
         
         <!-- 输出 -->
@@ -122,12 +127,6 @@ a{color:#38bdf8}
             </div>
         </div>
     </div>
-    
-    <div style="display: flex; justify-content: center; gap: 24px; margin-top: 20px;">
-        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🔵 论文一：生成主干 (TCSVT在审)</span>
-        <span style="font-size:0.7rem; background:#0f172a; padding:4px 12px; border-radius:16px;">🟢 论文二：语义模块 (进行中)</span>
-    </div>
-</div>
 <!-- ===== 方法 ===== -->
 <h4>项目亮点</h4>
     <div style="background:#111827; border-left: 4px solid #38bdf8; padding: 16px; margin: 20px 0; border-radius: 8px;">
