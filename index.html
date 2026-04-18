@@ -155,13 +155,14 @@ a{color:#38bdf8}
 <h4>项目亮点</h4>
     <div style="background:#111827; border-left: 4px solid #38bdf8; padding: 16px; margin: 20px 0; border-radius: 8px;">
     <h5 style="color:#38bdf8; margin-bottom: 6px;">论文一（在审）</h5>
-    <div style="font-size: 1.05rem; font-weight: 600;">All-Round Underwater ImageEnhancement Based on Long-Range Compensated Mamba</div>
+    <div style="font-size: 1.05rem; font-weight: 600;">Flow Matching + Mamba for Underwater Image Restoration</div>
     <div style="color:#9ca3af; font-size: 0.8rem; margin-bottom: 12px;">IEEE TCSVT，under review</div>
+    <p style="color:#cbd5f5;">提出基于Flow Matching与Mamba的生成式图像恢复框架，在低计算开销下实现复杂水下场景的高质量增强。</p>
      <ul style="margin-left: 20px; color:#d1d5db;">
-        <li>将 <strong>Flow Matching</strong> 引入图像恢复任务，建模从退化到清晰图像的连续生成过程，提升复杂退化场景下的恢复能力</li>
-    <li>基于 <strong>Mamba</strong> 构建高效生成主干，并设计 <strong>S2C-SS2D</strong> 模块，增强二维长程依赖建模能力，在低参数规模下保持高恢复质量</li>
-    <li>提出面向水下场景的<strong>灰度世界白平衡算法</strong>并转化为<strong>可学习的色彩校正模块</strong>，改善颜色偏移问题</li>
-        <li>参数量 <strong>9.78M</strong> (↓62%)，FLOPs <strong>33.27G</strong> (↓50%)，在 UIEB、LSUI 上达到 SOTA</li>
+        <li><strong>首次将Flow Matching用于图像恢复</strong>，建模退化→清晰的连续生成过程</li>
+        <li><strong>提出Mamba生成主干 + S2C-SS2D模块</strong>，增强二维长距离依赖建模</li>
+        <li><strong>提出水下灰度世界白平衡算法，设计可学习色彩校正模块</strong>，解决水下颜色偏移问题</li>
+        <li><strong>达到SOTA</strong>：参数9.78M（↓62%），FLOPs 33.27G（↓50%）</li>
     </ul>
     <!-- 效果对比图 -->
 <div style="margin-top:16px;">
@@ -170,6 +171,7 @@ a{color:#38bdf8}
     视觉效果对比
     （左→右：输入 | Ours | WF-Diff'24'CVPR'Diffusion | GuideHyb'25'TCSVT'CNN | Hformer'25'JOE'Transformer | FMamba'25'TGRS'Mamba）
   </div>
+<p style="color:#e2e8f0;"><strong>Ours在颜色恢复与细节保持上显著优于Diffusion / CNN / Transformer / Mamba方法</strong></p>
   <div style="display:flex; gap:10px; margin-bottom:10px;">
     <img src="images/Raw/10.png"    style="width:calc(100% / 7); border-radius:6px;">
     <img src="images/Ours/10.png"     style="width:calc(100% / 7); border-radius:6px;">
